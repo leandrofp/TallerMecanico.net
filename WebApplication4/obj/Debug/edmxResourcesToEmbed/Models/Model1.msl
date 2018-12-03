@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TallerMecanicoModelStoreContainer" CdmEntityContainer="TallerMecanicoEntities">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleado">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idTipoEmpleado" ColumnName="idTipoEmpleado" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenTrabajo">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.OrdenTrabajo">
+        <MappingFragment StoreEntitySet="OrdenTrabajo">
+          <ScalarProperty Name="idOrdenTrabajo" ColumnName="idOrdenTrabajo" />
+          <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+          <ScalarProperty Name="detalle" ColumnName="detalle" />
+          <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="cerrada" ColumnName="cerrada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repuesto">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.Repuesto">
+        <MappingFragment StoreEntitySet="Repuesto">
+          <ScalarProperty Name="idRepuesto" ColumnName="idRepuesto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="costo" ColumnName="costo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepuestoOrden">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.RepuestoOrden">
+        <MappingFragment StoreEntitySet="RepuestoOrden">
+          <ScalarProperty Name="idRepuestoOrden" ColumnName="idRepuestoOrden" />
+          <ScalarProperty Name="cantidadHs" ColumnName="cantidadHs" />
+          <ScalarProperty Name="cantidadRepuesto" ColumnName="cantidadRepuesto" />
+          <ScalarProperty Name="idOrdenTrabajo" ColumnName="idOrdenTrabajo" />
+          <ScalarProperty Name="idRepuesto" ColumnName="idRepuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEmpleado">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.TipoEmpleado">
+        <MappingFragment StoreEntitySet="TipoEmpleado">
+          <ScalarProperty Name="idTipoEmpleado" ColumnName="idTipoEmpleado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehiculo">
+      <EntityTypeMapping TypeName="TallerMecanicoModel.Vehiculo">
+        <MappingFragment StoreEntitySet="Vehiculo">
+          <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="patenta" ColumnName="patenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

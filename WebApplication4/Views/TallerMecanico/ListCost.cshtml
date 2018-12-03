@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication4.Models.RepuestoOrden>
+
+@{
+	ViewBag.Title = "Costo Total";
+	float total = 0;
+}
+
+<h2>Costo Total</h2>
+
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.cantidadHs)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.cantidadRepuesto)
+		</th>
+
+		<th>
+			@Html.DisplayNameFor(model => model.Repuesto.nombre)
+		</th>
+		<th>
+			@Html.DisplayName("Subtotal")
+		</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+
+
+		total = total + ((int)item.cantidadHs) * 350;
+
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.cantidadHs)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.cantidadRepuesto)
+			</td>
+
+			<td>
+				@Html.DisplayFor(modelItem => item.Repuesto.nombre)
+			</td>
+			<td>
+				@Html.Label((350 * item.cantidadHs).ToString())
+			</td>
+		</tr>
+	}
+
+
+</table>
+
+@Html.Label("TOTAL: ")
+@Html.Label(total.ToString())
+
+<div>
+	@Html.ActionLink("Back to List", "IndexEmpleado")
+</div>

@@ -1,0 +1,109 @@
+﻿@model WebApplication4.Models.OrdenTrabajo
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@if (!Model.cerrada)
+{
+	@Html.ActionLink("AgregarRepuesto", "CreateRepuestoOrden", new { id = Model.idOrdenTrabajo })
+}
+
+
+<div>
+	<h4>OrdenTrabajo</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.fechaIngreso)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.fechaIngreso)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.detalle)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.detalle)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.cerrada)
+		</dt>
+
+		<dd>
+			@if (Model.cerrada)
+			{
+				<div>
+					@Html.Label("SI") @Html.ActionLink("Ver costos", "ListCost", new { id = Model.idOrdenTrabajo } )
+				</div>
+			}
+			else
+			{
+				@Html.Label("NO");
+			}
+
+		</dd>
+
+		<dt>
+			Nombre Empleado
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Empleado.nombre)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Vehiculo.marca)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Vehiculo.marca)
+		</dd>
+
+
+		@if (Model.RepuestoOrden.Count() > 0)
+		{
+			<table class="table">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.RepuestoOrden.First().Repuesto.nombre)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.RepuestoOrden.First().cantidadRepuesto)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.RepuestoOrden.First().cantidadHs)
+					</th>
+				</tr>
+
+				@foreach (var item in Model.RepuestoOrden)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Repuesto.nombre)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.cantidadRepuesto)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.cantidadHs)
+						</td>
+					</tr>
+				}
+			</table>
+
+		}
+
+
+	</dl>
+</div>
+<p>
+	<!--@Html.ActionLink("Edit", "Edit", new { id = Model.idOrdenTrabajo }) |-->
+	@Html.ActionLink("Back to List", "IndexEmpleado")
+</p>

@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TallerMecanicoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="DNI" />
+    </Key>
+    <Property Name="DNI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vehiculo" Relationship="Self.FK_Vehiculo_Cliente" FromRole="Cliente" ToRole="Vehiculo" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="idEmpleado" />
+    </Key>
+    <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idTipoEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TipoEmpleado" Relationship="Self.FK_Empleado_TipoEmpleado" FromRole="Empleado" ToRole="TipoEmpleado" />
+    <NavigationProperty Name="OrdenTrabajo" Relationship="Self.FK_OrdenTrabajo_Empleado" FromRole="Empleado" ToRole="OrdenTrabajo" />
+  </EntityType>
+  <EntityType Name="OrdenTrabajo">
+    <Key>
+      <PropertyRef Name="idOrdenTrabajo" />
+    </Key>
+    <Property Name="idOrdenTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="detalle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+    <Property Name="idEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="cerrada" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Empleado" Relationship="Self.FK_OrdenTrabajo_Empleado" FromRole="OrdenTrabajo" ToRole="Empleado" />
+    <NavigationProperty Name="Vehiculo" Relationship="Self.FK_OrdenTrabajo_Vehiculo" FromRole="OrdenTrabajo" ToRole="Vehiculo" />
+    <NavigationProperty Name="RepuestoOrden" Relationship="Self.FK_RepuestoOrden_OrdenTrabajo" FromRole="OrdenTrabajo" ToRole="RepuestoOrden" />
+  </EntityType>
+  <EntityType Name="Repuesto">
+    <Key>
+      <PropertyRef Name="idRepuesto" />
+    </Key>
+    <Property Name="idRepuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="costo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="RepuestoOrden" Relationship="Self.FK_RepuestoOrden_Repuesto" FromRole="Repuesto" ToRole="RepuestoOrden" />
+  </EntityType>
+  <EntityType Name="RepuestoOrden">
+    <Key>
+      <PropertyRef Name="idRepuestoOrden" />
+    </Key>
+    <Property Name="idRepuestoOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cantidadHs" Type="Int32" />
+    <Property Name="cantidadRepuesto" Type="Int32" Nullable="false" />
+    <Property Name="idOrdenTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="idRepuesto" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrdenTrabajo" Relationship="Self.FK_RepuestoOrden_OrdenTrabajo" FromRole="RepuestoOrden" ToRole="OrdenTrabajo" />
+    <NavigationProperty Name="Repuesto" Relationship="Self.FK_RepuestoOrden_Repuesto" FromRole="RepuestoOrden" ToRole="Repuesto" />
+  </EntityType>
+  <EntityType Name="TipoEmpleado">
+    <Key>
+      <PropertyRef Name="idTipoEmpleado" />
+    </Key>
+    <Property Name="idTipoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_TipoEmpleado" FromRole="TipoEmpleado" ToRole="Empleado" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="idVehiculo" />
+    </Key>
+    <Property Name="idVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DNI" Type="Int32" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patenta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_Vehiculo_Cliente" FromRole="Vehiculo" ToRole="Cliente" />
+    <NavigationProperty Name="OrdenTrabajo" Relationship="Self.FK_OrdenTrabajo_Vehiculo" FromRole="Vehiculo" ToRole="OrdenTrabajo" />
+  </EntityType>
+  <Association Name="FK_Vehiculo_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="DNI" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="DNI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleado_TipoEmpleado">
+    <End Role="TipoEmpleado" Type="Self.TipoEmpleado" Multiplicity="1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEmpleado">
+        <PropertyRef Name="idTipoEmpleado" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="idTipoEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenTrabajo_Empleado">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+    <End Role="OrdenTrabajo" Type="Self.OrdenTrabajo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="idEmpleado" />
+      </Principal>
+      <Dependent Role="OrdenTrabajo">
+        <PropertyRef Name="idEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenTrabajo_Vehiculo">
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+    <End Role="OrdenTrabajo" Type="Self.OrdenTrabajo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="idVehiculo" />
+      </Principal>
+      <Dependent Role="OrdenTrabajo">
+        <PropertyRef Name="idVehiculo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepuestoOrden_OrdenTrabajo">
+    <End Role="OrdenTrabajo" Type="Self.OrdenTrabajo" Multiplicity="1" />
+    <End Role="RepuestoOrden" Type="Self.RepuestoOrden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenTrabajo">
+        <PropertyRef Name="idOrdenTrabajo" />
+      </Principal>
+      <Dependent Role="RepuestoOrden">
+        <PropertyRef Name="idOrdenTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepuestoOrden_Repuesto">
+    <End Role="Repuesto" Type="Self.Repuesto" Multiplicity="1" />
+    <End Role="RepuestoOrden" Type="Self.RepuestoOrden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repuesto">
+        <PropertyRef Name="idRepuesto" />
+      </Principal>
+      <Dependent Role="RepuestoOrden">
+        <PropertyRef Name="idRepuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TallerMecanicoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+    <EntitySet Name="OrdenTrabajo" EntityType="Self.OrdenTrabajo" />
+    <EntitySet Name="Repuesto" EntityType="Self.Repuesto" />
+    <EntitySet Name="RepuestoOrden" EntityType="Self.RepuestoOrden" />
+    <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" />
+    <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" />
+    <AssociationSet Name="FK_Vehiculo_Cliente" Association="Self.FK_Vehiculo_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleado_TipoEmpleado" Association="Self.FK_Empleado_TipoEmpleado">
+      <End Role="TipoEmpleado" EntitySet="TipoEmpleado" />
+      <End Role="Empleado" EntitySet="Empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenTrabajo_Empleado" Association="Self.FK_OrdenTrabajo_Empleado">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="OrdenTrabajo" EntitySet="OrdenTrabajo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenTrabajo_Vehiculo" Association="Self.FK_OrdenTrabajo_Vehiculo">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="OrdenTrabajo" EntitySet="OrdenTrabajo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepuestoOrden_OrdenTrabajo" Association="Self.FK_RepuestoOrden_OrdenTrabajo">
+      <End Role="OrdenTrabajo" EntitySet="OrdenTrabajo" />
+      <End Role="RepuestoOrden" EntitySet="RepuestoOrden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepuestoOrden_Repuesto" Association="Self.FK_RepuestoOrden_Repuesto">
+      <End Role="Repuesto" EntitySet="Repuesto" />
+      <End Role="RepuestoOrden" EntitySet="RepuestoOrden" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
