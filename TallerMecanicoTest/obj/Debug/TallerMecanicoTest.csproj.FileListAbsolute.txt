@@ -102,3 +102,8 @@ C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\o
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\obj\Debug\TallerMecanicoTest.csproj.CopyComplete
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\obj\Debug\TallerMecanicoTest.dll
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\obj\Debug\TallerMecanicoTest.pdb
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\bin\Debug\MimeKit.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\bin\Debug\MailKit.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\bin\Debug\MimeKit.xml
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\TallerMecanicoTest\bin\Debug\MailKit.xml

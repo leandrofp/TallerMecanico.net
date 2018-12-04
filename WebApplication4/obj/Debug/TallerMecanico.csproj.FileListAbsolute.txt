@@ -307,3 +307,8 @@ C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\obj\
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\obj\Debug\TallerMecanico.csproj.CopyComplete
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\obj\Debug\WebApplication4.dll
 C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\obj\Debug\WebApplication4.pdb
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\bin\BouncyCastle.Crypto.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\bin\MailKit.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\bin\MimeKit.dll
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\bin\MailKit.xml
+C:\Users\PC1\source\repos\TallerMecanico\TallerMecanico.net\WebApplication4\bin\MimeKit.xml

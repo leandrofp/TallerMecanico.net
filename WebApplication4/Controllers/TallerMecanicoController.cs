@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication4.Models;
 
+using System.Net.Mail;
+using System.Net;
+
 
 
 namespace WebApplication4.Controllers
@@ -20,14 +23,28 @@ namespace WebApplication4.Controllers
 		[AllowAnonymous]
 		public ActionResult Login()
 		{
-			return View();
+				return View();
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Login(String usuario)
 		{
-			if(usuario == null)
+
+
+			// asi como esta funciona, la libreria de mail no corre el connect */
+			var client = new SmtpClient("smtp.gmail.com", 587)
+			{
+				Credentials = new NetworkCredential("leandro.fernandezp@gmail.com", "CONTRASEÑADELGMAIL"),
+				EnableSsl = true
+			};
+			client.Send("leandro.fernandezp@gmail.com", "leandro.fernandezp@gmail.com", "test", "testbody");
+			Console.WriteLine("Sent");
+			//------------------------------------------------------------------
+
+
+
+			if (usuario == null)
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
 			List<Empleado> empleados = db.Empleado.ToList();
