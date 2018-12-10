@@ -1,13 +1,41 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApplication4.Controllers;
+using NUnit.Framework;
 
 namespace StoreTests.Controllers
 {
-	[TestClass]
+	[TestFixture]
+	//[TestClass]
 	public class TallerMecanicoTest
 	{
+
+		[TestCase("null", "Login")]	// algo que no exista en la BD
+		[TestCase("pepe", "indexEmpleado")]
+		[TestCase("lean", "indexSupervisor")]
+		public void TallerMecanicoLoginTest(string username , string expectedRoute)
+		{
+
+			var controller = new TallerMecanicoController();
+
+			if (!username.Equals("null")){
+				var result = (RedirectToRouteResult)controller.Login(username);
+				Assert.AreEqual(expectedRoute, result.RouteValues["action"]);
+			}
+			else
+			{
+				var result = controller.Login(username) as ViewResult;
+				Assert.AreEqual(expectedRoute, result.ViewName);
+			}
+
+
+
+		}
+
+		
+		//CAMBIAR LIBRERIAS 
+		/*
 		[TestMethod]
 		public void TestLoginRedirectEmpleadoPost()
 		{
@@ -33,6 +61,6 @@ namespace StoreTests.Controllers
 			var controller = new TallerMecanicoController();
 			var result = controller.Login("NULL") as ViewResult;
 			Assert.AreEqual("Login", result.ViewName);
-		}
+		}*/
 	}
 }

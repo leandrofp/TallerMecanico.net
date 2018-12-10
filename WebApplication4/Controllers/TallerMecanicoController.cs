@@ -8,8 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication4.Models;
 
-using System.Net.Mail;
-using System.Net;
+
 
 
 
@@ -27,19 +26,20 @@ namespace WebApplication4.Controllers
 		}
 
 		[HttpPost]
+		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public ActionResult Login(String usuario)
 		{
 
 
 			// asi como esta funciona, la libreria de mail no corre el connect */
-			var client = new SmtpClient("smtp.gmail.com", 587)
+			/*var client = new SmtpClient("smtp.gmail.com", 587)
 			{
 				Credentials = new NetworkCredential("leandro.fernandezp@gmail.com", "CONTRASEÑADELGMAIL"),
 				EnableSsl = true
 			};
 			client.Send("leandro.fernandezp@gmail.com", "leandro.fernandezp@gmail.com", "test", "testbody");
-			Console.WriteLine("Sent");
+			Console.WriteLine("Sent");*/
 			//------------------------------------------------------------------
 
 
@@ -64,11 +64,11 @@ namespace WebApplication4.Controllers
 			}
 
 			//TODO: Validate credentials Correctly, this code is only for demo !!
-			bool isCredentialValid = true;
-            if (isCredentialValid)
-            {
-                var token = TokenGenerator.GenerateTokenJwt(usuario);
-				ViewBag.token = token;
+			//bool isCredentialValid = true;
+            //if (isCredentialValid)
+            //{
+            //    var token = TokenGenerator.GenerateTokenJwt(usuario);
+			//	ViewBag.token = token;
 				if (empleado.TipoEmpleado.nombre.Equals("empleado"))
 				{
 					return RedirectToAction("indexEmpleado", empleado);
@@ -78,11 +78,11 @@ namespace WebApplication4.Controllers
 					return RedirectToAction("indexSupervisor", empleado);
 				}
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-            else
-            {
-				return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
-			}
+			//}
+            //else
+            //{
+			//	return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+			//}
 		
 		}
 
